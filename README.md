@@ -6,21 +6,26 @@ The TMP6x linear thermistors offer linearity and consistent sensitivity across t
 
 # How to connect
 
-More informa
+More information on how to connect, please see the datasheet for recommendations.
 
 # How to Use
 
 1) Download and Add the source files to your project (Download the files, use the Arduino lib manager or Git Clone)
-``
+
 2) Start using the Lib, include the following:
-`#include "TMP6x.h"`
+```#include "TMP6x.h"```
+
 3) Construct an instance:
-`Tmp61 tmp61 = Tmp61(3.3f, 16, 4.069);`
+```Tmp61 tmp61 = Tmp61(3.3f, 16, 4.069);```
+
 4) Read the temperature:
+
 4.1) Integer with 1° degree presicion:
-`tmp61.GetTemperature(yourAnalogValue);`
+```tmp61.GetTemperature(yourAnalogValue);```
+
 4.2) Decimal with polynomial regression
-`tmp61.GetInterpolatedTemperature(yourAnalogValue);`
+```tmp61.GetInterpolatedTemperature(yourAnalogValue);```
+
 5) Enjoy some temperature and support me ;)
 
 # Full example:
@@ -61,4 +66,4 @@ TI Design Tool (Excel calculation): [Download ZIP](http://www.ti.com/lit/zip/sbo
 
 The TMP6x Linear Thermistors are a products of Texas Instruments
 
->>> Feel free to buy me beer ;)
+Feel free to buy me beer ;)
