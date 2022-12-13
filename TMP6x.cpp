@@ -13,7 +13,24 @@ float TMP6x::calculateResistance(int adc)
     return resistance;
 }
 
-float TMP61::GetInterpolatedTemperature(int adc) // 4th order polynomial regression
+float TMP6x::LastCalculatedTemperature()
+{
+    return temparture;
+}
+
+float TMP6x::LastCalculatedResistance()
+{
+    return resistance;
+}
+
+float TMP6x::ToFahrentheit(float temperatureC)
+{
+    return (temperatureC * 9.0f / 5.0f) + 32.0f;
+}
+
+//////////////////////////////////////////
+
+float TMP61::GetInterpolatedTemperature(int adc)
 {
     resistance = calculateResistance(adc);
 
@@ -21,23 +38,39 @@ float TMP61::GetInterpolatedTemperature(int adc) // 4th order polynomial regress
     {
         if (table_tmp61_5deg[i][1] >= resistance)
         {
-            // the linear interpolation process is y = y1 + ((x - x1) / (x2 - x1)) * (y2 - y1)
-            x1 = table_tmp61_5deg[i - 1][1]; // find the lower resistance value in the table
-            x2 = table_tmp61_5deg[i][1];     // find the higher resistance value in the table
-            y1 = table_tmp61_5deg[i - 1][0]; // find the difference by subtracting the lower resistance value from the table from the actual resistance value
-            y2 = table_tmp61_5deg[i][0];     // find the difference by subtracting the higher resistance value from the table from the actual resistance value
+            // Linear interpolation:
+            //      y = y1 + ((x - x1) / (x2 - x1)) * (y2 - y1)
 
-            temparture = y1 + ((resistance - x1) / (x2 - x1)) * (y2 - y1); // Use the low value resistance and temperature
-            return resistance;
-            break;
+            x1 = table_tmp61_5deg[i - 1][1];
+            x2 = table_tmp61_5deg[i][1];
+            y1 = table_tmp61_5deg[i - 1][0];
+            y2 = table_tmp61_5deg[i][0];
+
+            temparture = y1 + ((resistance - x1) / (x2 - x1)) * (y2 - y1);
+
+            return temparture;
         }
     }
-    return -99.99f;
+    return TMP6x_ERROR;
 }
 
 int TMP61::GetTemperature(int adc)
 {
     resistance = calculateResistance(adc);
-
-    return 0;
+    for (int i = 0; i < 167; ++i)
+    {
+        if (table_tmp61_1deg[i][1] >= resistance)
+        {
+            if (resistance - table_tmp61_1deg[i][1] <= resistance - table_tmp61_1deg[i - 1][1]) // if the high resistance is closer to the actual resistance
+            {
+                temparture = table_tmp61_1deg[i][0];
+            }
+            else
+            {
+                temparture = table_tmp61_1deg[i - 1][0];
+            }
+            return temparture;
+        }
+    }
+    return TMP6x_ERROR;
 }

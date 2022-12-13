@@ -4,6 +4,8 @@
 #ifndef TMP6X_h
 #define TMP6X_h
 
+#define TMP6x_ERROR -99
+
 class TMP6x
 {
 protected:
@@ -23,7 +25,7 @@ protected:
     int x2 = 0; // the higher resistance value in the table
     int y1 = 0; // the difference between the lower resistance value from the table from the actual resistance value
     int y2 = 0; // the difference between the higher resistance value from the table from the actual resistance value
-    
+
     float calculateResistance(int adc);
 
 public:
@@ -35,6 +37,9 @@ public:
             adcBits = (adcBits * voltageIn) / maxAdcVoltageGain;
         vBiasBits = voltageIn / (float)adcBits;
     }
+    float LastCalculatedTemperature();
+    float LastCalculatedResistance();
+    float ToFahrentheit(float temperature);
 };
 
 class TMP61 : public TMP6x

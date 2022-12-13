@@ -1,8 +1,12 @@
-# TI TMP6x (TMP61, TMP63 and TMP64)
+# Texas Instruments (TI) TMP6x Temperature sensors
 
-Plain and easy to use Libary for the TI linear thermistors using your own Analog Digital Converter (ADC).
+Plain and easy to use Libary for the TI linear thermistors (TMP61, TMP63 and TMP64) using your own Analog Digital Converter (ADC). From -40°C to +125°C.
+
+The following are supported: TMP61, TMP63 and TMP64
 
 The TMP6x linear thermistors offer linearity and consistent sensitivity across temperature to enable simple and accurate methods for temperature conversion. The low power consumption and a small thermal mass of the device minimize the impact of self-heating.
+
+This libary is heavily inspired by the calculations provided by the TI datasheets. References at the bottom.
 
 # How to connect
 
@@ -19,15 +23,15 @@ More information on how to connect, please see the datasheet for recommendations
 3) Construct an instance:
 ```TMP61 tmp61 = TMP61(3.3f, 16, 4.069);```
 
-4) Read the temperature:
+4) Read the (analog) Thermistor pin
 
-4.1) Integer with 1° degree presicion:
+5) Read Integer Temperature with 1° degree precision:
 ```tmp61.GetTemperature(yourAnalogValue);```
 
-4.2) Decimal with polynomial regression
+6) Read Decimal Temperature with linear interpolation:
 ```tmp61.GetInterpolatedTemperature(yourAnalogValue);```
 
-5) Enjoy some temperature and support me ;)
+7) Enjoy some temperature and support me ;)
 
 ## Full example
 Example showing Arduino C code on how to use the libary.
