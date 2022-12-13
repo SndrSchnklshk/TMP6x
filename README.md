@@ -2,7 +2,10 @@
 
 Plain and easy to use Libary for the TI linear thermistors (TMP61, TMP63 and TMP64) using your own Analog Digital Converter (ADC). From -40°C to +125°C.
 
-The following are supported: TMP61, TMP63 and TMP64
+The following are supported: 
+**TMP61**
+**TMP63**
+**TMP64**
 
 The TMP6x linear thermistors offer linearity and consistent sensitivity across temperature to enable simple and accurate methods for temperature conversion. The low power consumption and a small thermal mass of the device minimize the impact of self-heating.
 
