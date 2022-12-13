@@ -10,13 +10,14 @@ More information on how to connect, please see the datasheet for recommendations
 
 # How to Use
 
-1) Download and Add the source files to your project (Download the files, use the Arduino lib manager or Git Clone)
+1) Download and Add the source files to your project (Download the files, use the Arduino lib manager or Git Clone):
+```git clone SndrSchnklshk/TMP6x```
 
 2) Start using the Lib, include the following:
 ```#include "TMP6x.h"```
 
 3) Construct an instance:
-```Tmp61 tmp61 = Tmp61(3.3f, 16, 4.069);```
+```TMP61 tmp61 = TMP61(3.3f, 16, 4.069);```
 
 4) Read the temperature:
 
@@ -28,28 +29,33 @@ More information on how to connect, please see the datasheet for recommendations
 
 5) Enjoy some temperature and support me ;)
 
-# Full example:
-Example showing Arduino code on how to use the libary.
+## Full example
+Example showing Arduino C code on how to use the libary.
 
 ```
 //Arduino Example
-#include "TMP6x.h"
-#define PIN_ADC     1 // Random pin
+#include "TMP6x.h"                      // Include the header
 
-Tmp61 tmp61 = Tmp61(3.3f, 12);
+#define PIN_ADC     1                   // Random ADC pin
 
-void setup() {
-   Serial.begin(115200);     // Init the serial device
+TMP61 tmp61 = TMP61(3.3f, 12);
+
+void setup() 
+{
+   Serial.begin(115200);                // Init the serial device
+   Serial.print("Ola! Feeling cool?");  // Welcome message 
 }
 
-void loop() {
-    int a = analogRead(PIN_ADC); // Read the analog value
+void loop() 
+{
+    int a = analogRead(PIN_ADC);        // Read the analog value
     float t = tmp61.GetInterpolatedTemperature(a);  // Calculate the temperature
-    Serial.print("Temperature is ");
-    Serial.print(t);  // Print the Temperature
-    Serial.println("°C");
+    
+    Serial.print("Temperature is ");    // Begin printing output
+    Serial.print(t);                    // Print the Temperature
+    Serial.println("°C");               // Print the degrees plus a newline
 
-    delay(5000);    // Wait 5 seconds
+    delay(5000);                        // Wait 5 seconds
 }
 ```
 
