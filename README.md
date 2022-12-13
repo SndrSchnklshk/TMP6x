@@ -1,19 +1,24 @@
 # Texas Instruments (TI) TMP6x Temperature sensors
 
-Plain and easy to use Libary for the TI linear thermistors (TMP61, TMP63 and TMP64) using your own Analog Digital Converter (ADC). From -40°C to +125°C.
+Plain and easy to use Libary for the TI linear thermistors (TMP61, TMP63 and TMP64) using your own Analog Digital Converter (ADC). 
 
-The following are supported: 
-**TMP61**
-**TMP63**
-**TMP64**
+The following are currently supported by the libary: **TMP61**, **TMP63** and **TMP64** (feel free to extend)
 
 The TMP6x linear thermistors offer linearity and consistent sensitivity across temperature to enable simple and accurate methods for temperature conversion. The low power consumption and a small thermal mass of the device minimize the impact of self-heating.
+
+Temperature ranging from -40°C to +125°C with 1% accuracy.
 
 This libary is heavily inspired by the calculations provided by the TI datasheets. References at the bottom.
 
 # How to connect
 
-More information on how to connect, please see the datasheet for recommendations.
+An quick and easy way to connect your Thermistor is to measure the resistance:
+
+![This is an image](https://github.com/SndrSchnklshk/TMP6x/img/howtouse.png)
+
+RBias should be picked according to your thermistor (e.g. for the TMP63 a 100K Ohm with 1% is a good pick).
+
+Find more information or ideas on how to connect, please see the datasheet for recommendations.
 
 # How to Use
 
