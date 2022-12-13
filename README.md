@@ -14,7 +14,7 @@ This libary is heavily inspired by the calculations provided by the TI datasheet
 
 An quick and easy way to connect your Thermistor is to measure the resistance:
 
-![This is an image](https://github.com/SndrSchnklshk/TMP6x/img/howtouse.png)
+![This is an image](https://github.com/SndrSchnklshk/TMP6x/blob/master/img/howtouse.png)
 
 RBias should be picked according to your thermistor (e.g. for the TMP63 a 100K Ohm with 1% is a good pick).
 
@@ -74,7 +74,7 @@ void loop()
 # Future improvements
 
 1) Add internal buffer with some sophisticated averaging
-2) ...
+2) ... let me know!
 
 # More information
 
