@@ -20,7 +20,7 @@ enum TMP6x_Voltages
 class TMP6x
 {
 protected:
-    TMP6x_Voltages volatage = TMP6x_Voltages::V33;
+    TMP6x_Voltages voltage = TMP6x_Voltages::V33;
     float voltageIn = 3.3f;
     float maxAdcVoltageGain = 0;
     int resistorBias = 0;
@@ -41,9 +41,9 @@ protected:
     float calculateResistance(int adc);
 
 public:
-    TMP6x(TMP6x_Voltages volatage, int resistorBias, int adcResolution, float maxAdcVoltageGain)
+    TMP6x(TMP6x_Voltages voltage, int resistorBias, int adcResolution, float maxAdcVoltageGain)
     {
-        switch (volatage)
+        switch (voltage)
         {
         case TMP6x_Voltages::V18:
             this->voltageIn = 1.8f;
@@ -65,14 +65,15 @@ public:
 
         this->vBiasBits = this->voltageIn / (float)this->adcBits;
     }
-    float LastCalculatedTemperature();
-    float LastCalculatedResistance();
-    float ToFahrentheit(float temperature);
 
     int GetMaxAdcBits()
     {
         return this->adcBits;
     }
+
+    float LastCalculatedTemperature();
+    float LastCalculatedResistance();
+    float ToFahrentheit(float temperature);
 };
 
 class TMP61 : public TMP6x
@@ -585,6 +586,11 @@ private:
     int getRecord(int row, short col);
 
 public:
+    TMP61(TMP6x_Voltages voltage,
+          int adcResolution)
+        : TMP6x(voltage, 10000, adcResolution, 0)
+    {
+    }
     TMP61(TMP6x_Voltages voltage,
           int adcResolution,
           float maxAdcVoltageGain)
