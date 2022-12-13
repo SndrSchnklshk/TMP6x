@@ -8,7 +8,7 @@ float TMP6x::calculateResistance(int adc)
     tmp = 0;
     resistance = 0;
 
-    tmp = adcBits * adc;
+    tmp = vBiasBits * adc;
     resistance = tmp / ((voltageIn - tmp) / resistorBias);
     return resistance;
 }
@@ -23,6 +23,9 @@ float TMP6x::LastCalculatedResistance()
     return resistance;
 }
 
+/// @brief Converts the given temperature to Fahrenheit
+/// @param temperatureC Temperature in degrees Celcius
+/// @return Returns the temperature in Fahrenheit
 float TMP6x::ToFahrentheit(float temperatureC)
 {
     return (temperatureC * 9.0f / 5.0f) + 32.0f;
@@ -30,21 +33,36 @@ float TMP6x::ToFahrentheit(float temperatureC)
 
 //////////////////////////////////////////
 
+int TMP61::getRecord(int row, short col)
+{
+    switch (voltage)
+    {
+
+    case TMP6x_Voltages::V18:
+        return table_v18_tmp61_1deg[row][col];
+    default:
+    case TMP6x_Voltages::V33:
+        return table_v33_tmp61_1deg[row][col];
+    case TMP6x_Voltages::V50:
+        return table_v50_tmp61_1deg[row][col];
+    }
+}
+
 float TMP61::GetInterpolatedTemperature(int adc)
 {
     resistance = calculateResistance(adc);
 
-    for (int i = 0; i < 34; ++i)
+    for (int i = 0; i < 167; ++i)
     {
-        if (table_tmp61_5deg[i][1] >= resistance)
+        if (getRecord(i, 1) >= resistance)
         {
             // Linear interpolation:
             //      y = y1 + ((x - x1) / (x2 - x1)) * (y2 - y1)
 
-            x1 = table_tmp61_5deg[i - 1][1];
-            x2 = table_tmp61_5deg[i][1];
-            y1 = table_tmp61_5deg[i - 1][0];
-            y2 = table_tmp61_5deg[i][0];
+            x1 = getRecord(i - 1, 1);
+            x2 = getRecord(i, 1);
+            y1 = getRecord(i - 1, 0);
+            y2 = getRecord(i, 0);
 
             temparture = y1 + ((resistance - x1) / (x2 - x1)) * (y2 - y1);
 
@@ -59,15 +77,15 @@ int TMP61::GetTemperature(int adc)
     resistance = calculateResistance(adc);
     for (int i = 0; i < 167; ++i)
     {
-        if (table_tmp61_1deg[i][1] >= resistance)
+        if (getRecord(i, 1) >= resistance)
         {
-            if (resistance - table_tmp61_1deg[i][1] <= resistance - table_tmp61_1deg[i - 1][1]) // if the high resistance is closer to the actual resistance
+            if (resistance - getRecord(i, 1) <= resistance - getRecord(i - 1, 1)) // if the high resistance is closer to the actual resistance
             {
-                temparture = table_tmp61_1deg[i][0];
+                temparture = getRecord(i, 0);
             }
             else
             {
-                temparture = table_tmp61_1deg[i - 1][0];
+                temparture = getRecord(i - 1, 0);
             }
             return temparture;
         }
