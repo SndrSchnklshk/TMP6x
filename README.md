@@ -64,7 +64,7 @@ float TMP61_temperature(void* obj, int adc);
 
 Create a class file for the wrapper:
 ```
-#include "TMP6xWrapper.h" //Whatever name you have picked from for the above header
+#include "TMP6xWrapper.h" //Whatever name you have picked for for the above header
 #include "TMP6x.h"
 /*extern "C"*/ void* TMP61_create() {
     return new TMP61(TMP6x_Voltages::V33, 15, 6.144); //Just an example
