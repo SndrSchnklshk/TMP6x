@@ -23,7 +23,7 @@ Find more information or ideas on how to connect, please see the datasheet for r
 # How to Use
 
 1) Download and Add the source files to your project (Download the files, use the Arduino lib manager or Git Clone):
-```git clone SndrSchnklshk/TMP6x```
+```git clone https://github.com/SndrSchnklshk/TMP6x```
 
 2) Start using the Lib, include the following:
 ```#include "TMP6x.h"```
@@ -44,6 +44,46 @@ Find more information or ideas on how to connect, please see the datasheet for r
 ## Full example
 Example showing Arduino C code on how to use the library .
 
+### STM32
+To use the class lib in STM32 in class C (e.g. Stm32CubeIDE) wrap the libary as follows:
+
+Create a new Wrapper Header file (TMP6xWrapper.h):
+
+```
+#include 
+#ifdef __cplusplus
+extern "C" {
+#endif
+void* TMP61_create();
+void TMP61_release(void* obj);
+float TMP61_temperature(void* obj, int adc);
+#ifdef __cplusplus
+}
+#endif
+```
+
+Create a class file for the wrapper:
+```
+#include "TMP6xWrapper.h" //Whatever name you have picked from for the above header
+#include "TMP6x.h"
+/*extern "C"*/ void* TMP61_create() {
+    return new TMP61(TMP6x_Voltages::V33, 15, 6.144); //Just an example
+}
+void TMP61_release(void* obj) {
+    delete static_cast<TMP61*>(obj);
+}
+/*extern "C"*/ float TMP61_temperature(void* obj, int adc) {
+    return static_cast<TMP61*>(obj)->GetInterpolatedTemperature(adc);
+}
+```
+
+Enjoy the lib, by calling:
+```
+void* tmp61Obj = TMP61_create();
+temperature = TMP61_temperature(tmp61Obj, yourAdcValue);
+```
+
+### Arduino
 ```
 //Arduino Example
 #include "TMP6x.h"                      // Include the header
