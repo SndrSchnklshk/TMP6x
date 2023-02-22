@@ -28,8 +28,8 @@ Find more information or ideas on how to connect, please see the datasheet for r
 2) Start using the Lib, include the following:
 ```#include "TMP6x.h"```
 
-3) Construct an instance:
-```TMP61 tmp61 = TMP61(3.3f, 16, 4.069);```
+3) Construct an instance (e.g. 3.3V, 16-bit and max gain of 4.069V):
+```TMP61 tmp61 = TMP61(TMP6x_Voltages::V33, 16, 4.069);```
 
 4) Read the (analog) Thermistor pin
 
@@ -50,7 +50,7 @@ Example showing Arduino C code on how to use the library .
 
 #define PIN_ADC     1                   // Random ADC pin
 
-TMP61 tmp61 = TMP61(3.3f, 12);
+TMP61 tmp61 = TMP61(TMP6x_Voltages::V33, 12);   // 3.3V, 12-bit
 
 void setup() 
 {

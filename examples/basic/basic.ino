@@ -3,7 +3,7 @@
 
 #define PIN_ADC     1                   // Random ADC pin
 
-TMP61 tmp61 = TMP61(3.3f, 12);
+TMP61 tmp61 = TMP61(TMP6x_Voltages::V33, 12);
 
 void setup() 
 {
