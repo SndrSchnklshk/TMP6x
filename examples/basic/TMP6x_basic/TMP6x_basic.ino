@@ -1,4 +1,6 @@
-//Arduino Example
+//Arduino Example for the TMP61 sensor
+
+#include "Arduino.h"
 #include "TMP6x.h"                      // Include the header
 
 #define PIN_ADC     1                   // Random ADC pin
