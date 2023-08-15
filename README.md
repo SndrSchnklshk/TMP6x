@@ -1,6 +1,6 @@
 [![.github/workflows/main.yml](https://github.com/SndrSchnklshk/TMP6x/actions/workflows/main.yml/badge.svg)](https://github.com/SndrSchnklshk/TMP6x/actions/workflows/main.yml)
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://www.buymeacoffee.com/sndrschnklshk){:target="_blank"}
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://www.buymeacoffee.com/sndrschnklshk)
 
 # Texas Instruments (TI) TMP6x Temperature sensors
 
