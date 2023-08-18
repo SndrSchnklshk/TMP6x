@@ -2,7 +2,7 @@
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://www.buymeacoffee.com/sndrschnklshk)
 
-# Texas Instruments (TI) TMP6x Temperature sensors
+# Texas Instruments (TI) TMP61, TMP63, TMP64 TMP Temperature sensors
 
 Plain and easy to use Library for the TI linear thermistors (TMP61, TMP63 and TMP64) using your own Analog Digital Converter (ADC). 
 
@@ -46,7 +46,7 @@ Find more information or ideas on how to connect, please see the datasheet for r
 7) Enjoy some temperature and support me ;)
 
 ## Full example
-Example showing Arduino C code on how to use the library .
+Example showing Arduino C code on how to use the library.
 
 ### STM32
 To use the class lib in STM32 in class C (e.g. Stm32CubeIDE) wrap the libary as follows:
